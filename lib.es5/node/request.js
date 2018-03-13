@@ -92,6 +92,11 @@ var Request = function () {
         _this.onload();
       });
 
+      req.on("data", function (data) {
+        console.log('data', data);
+        _this.data = data;
+      });
+
       req.on("error", function (err) {
         _this.onerror(err);
       });
