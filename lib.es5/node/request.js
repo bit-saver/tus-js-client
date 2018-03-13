@@ -96,6 +96,10 @@ var Request = function () {
         _this.onerror(err);
       });
 
+      req.on("end", function (body) {
+        console.log('body', body);
+      });
+
       if (body instanceof _stream.Readable) {
         body.pipe(new ProgressEmitter(this.upload.onprogress)).pipe(req);
       } else {
