@@ -48,6 +48,7 @@ var Request = function () {
     this._request = null;
 
     this.status = 0;
+    this.response = null;
 
     this.onerror = noop;
     this.onload = noop;
@@ -85,6 +86,8 @@ var Request = function () {
       req.on("response", function (res) {
         _this.status = res.statusCode;
         _this._resHeaders = res.headers;
+        console.log( 'response', res );
+        _this.response = res;
 
         _this.onload();
       });
