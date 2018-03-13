@@ -48,7 +48,6 @@ var Request = function () {
     this._request = null;
 
     this.status = 0;
-    this.response = null;
 
     this.onerror = noop;
     this.onload = noop;
@@ -86,18 +85,12 @@ var Request = function () {
       req.on("response", function (res) {
         _this.status = res.statusCode;
         _this._resHeaders = res.headers;
-        res.on("data", function (data) {
-          console.log('data', data);
-        });
+        console.log('headers', res.headers);
         _this.onload();
       });
 
       req.on("error", function (err) {
         _this.onerror(err);
-      });
-
-      req.on("end", function (body) {
-        console.log('body', body);
       });
 
       if (body instanceof _stream.Readable) {
