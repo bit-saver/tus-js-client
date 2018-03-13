@@ -86,15 +86,10 @@ var Request = function () {
       req.on("response", function (res) {
         _this.status = res.statusCode;
         _this._resHeaders = res.headers;
-        console.log('response', res);
-        console.log('response.body', res.body);
-        _this.response = res;
+        res.on("data", function (data) {
+          console.log('data', data);
+        });
         _this.onload();
-      });
-
-      req.on("data", function (data) {
-        console.log('data', data);
-        _this.data = data;
       });
 
       req.on("error", function (err) {
